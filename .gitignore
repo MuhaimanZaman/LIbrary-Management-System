@@ -1,0 +1,7 @@
+database.py
+__pycache__/
+*.pyc
+build/
+dist/
+installer_output/
+installer_scripts/
