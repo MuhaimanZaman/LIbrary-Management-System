@@ -92,8 +92,6 @@ def get_books_by_category():
 
 
 def get_library_statistics():
-    """Returns ONE summary row combining several counts — a snapshot
-    of the whole library's current state."""
     stats = {}
     try:
         cursor.execute("SELECT COUNT(*) AS c FROM books")

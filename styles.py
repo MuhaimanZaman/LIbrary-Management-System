@@ -77,7 +77,6 @@ def make_sidebar_button(parent, text, command):
 
 
 def set_active_sidebar_button(all_buttons, active_btn):
-    """Highlights the clicked button, resets the rest."""
     for b in all_buttons:
         b.config(bg=COLORS["sidebar_btn"])
     active_btn.config(bg=COLORS["sidebar_btn_active"])

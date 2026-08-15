@@ -14,22 +14,11 @@ def _rows_to_dicts(rows):
 
 
 def get_borrow_transaction(transaction_id):
-    """Fetches a single borrow_transaction row as a dict, or None."""
     cursor.execute("SELECT * FROM borrow_transaction WHERE transaction_id = %s", (transaction_id,))
     results = _rows_to_dicts(cursor.fetchall())
     return results[0] if results else None
 
-
 def return_book(transaction_id, remarks=None):
-    """Processes a book return:
-       1. Looks up the borrow transaction
-       2. Refuses if it's already been returned
-       3. Sets return_date = today, status = 'returned'
-       4. Gives the copy back to the shelf (available_copies + 1)
-       5. If returned late, inserts an unpaid fine row
-          (amount = days_late * FINE_PER_DAY)
-
-       Returns (success: bool, message: str)."""
 
     try:
         transaction = get_borrow_transaction(transaction_id)
@@ -83,10 +72,6 @@ def return_book(transaction_id, remarks=None):
 
 
 def get_overdue_transactions():
-    """Bonus for your Reports module: everything still marked 'borrowed'
-       whose due_date has already passed — i.e. the 'they never
-       returned it' case you asked about. No return action is taken
-       here, this just surfaces the list so staff can chase it up."""
     try:
         cursor.execute(
             "SELECT * FROM borrow_transaction WHERE status = %s AND due_date < %s",
