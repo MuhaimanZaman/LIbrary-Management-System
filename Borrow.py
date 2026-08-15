@@ -5,14 +5,6 @@ from books import get_books
 
 
 def add_borrow_transaction(transaction_id, book_id, member_id, employee_id):
-    """Issues a book to a member, after checking:
-       1. The book exists and has at least one available copy
-       2. The member exists and their membership is active
-       Then auto-fills issue_date (today), due_date (issue_date + 7 days),
-       sets status to 'borrowed', and decrements the book's available_copies.
-
-       Returns (success: bool, message: str) so the GUI can show the
-       right feedback either way."""
 
     books = get_books(book_id=book_id)
     if not books:
